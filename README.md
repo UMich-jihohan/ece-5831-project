@@ -23,7 +23,10 @@ The code is powered by YOLOv5 from ultralytics.
 ```text
 ece-5831-project/
 ├── docs/
-│   └── DEVELOPER.md  
+│   ├── DEVELOPER.md 
+│   ├── ECE 5831 Final Project Proposal.pdf
+│   ├── ECE 5831 Project Update 1.pdf
+│   └── ECE 5831 Project Update 2.pdf
 ├── src/
 │   ├── classfy/
 │   ├── models/
@@ -35,7 +38,7 @@ ece-5831-project/
 
 ## <div align="center"><a name="docs"></a>Documentation</div>
 
-See the [docs folder](https://https://github.com/UMich-jihohan/ece-5831-project/docs) for full documentation.
+See the [docs folder](https://github.com/UMich-jihohan/ece-5831-project/tree/master/docs) for full documentation.
 
 <!-- <details open>
 <summary>Install</summary>
