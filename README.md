@@ -23,7 +23,10 @@ The code is powered by YOLOv5 from ultralytics.
 ```text
 ece-5831-project/
 ├── docs/
-│   └── DEVELOPER.md  
+│   ├── DEVELOPER.md 
+│   ├── ECE 5831 Final Project Proposal.pdf
+│   ├── ECE 5831 Project Update 1.pdf
+│   └── ECE 5831 Project Update 2.pdf
 ├── src/
 │   ├── Project_2D/
 │   │   ├── classfy/
