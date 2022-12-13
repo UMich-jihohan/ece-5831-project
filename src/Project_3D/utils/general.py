@@ -23,9 +23,8 @@ from itertools import repeat
 from multiprocessing.pool import ThreadPool
 from pathlib import Path
 from subprocess import check_output
-from tarfile import is_tarfile
 from typing import Optional
-from zipfile import ZipFile, is_zipfile
+from zipfile import ZipFile
 
 import cv2
 import IPython
@@ -72,7 +71,7 @@ def is_chinese(s='人工智能'):
 
 def is_colab():
     # Is environment a Google Colab instance?
-    return 'google.colab' in sys.modules
+    return 'COLAB_GPU' in os.environ
 
 
 def is_notebook():
@@ -283,16 +282,11 @@ def file_size(path):
 def check_online():
     # Check internet connectivity
     import socket
-
-    def run_once():
-        # Check once
-        try:
-            socket.create_connection(("1.1.1.1", 443), 5)  # check host accessibility
-            return True
-        except OSError:
-            return False
-
-    return run_once() or run_once()  # check twice to increase robustness to intermittent connectivity issues
+    try:
+        socket.create_connection(("1.1.1.1", 443), 5)  # check host accessibility
+        return True
+    except OSError:
+        return False
 
 
 def git_describe(path=ROOT):  # path must be a directory
@@ -374,7 +368,7 @@ def check_requirements(requirements=ROOT / 'requirements.txt', exclude=(), insta
     if s and install and AUTOINSTALL:  # check environment variable
         LOGGER.info(f"{prefix} YOLOv5 requirement{'s' * (n > 1)} {s}not found, attempting AutoUpdate...")
         try:
-            # assert check_online(), "AutoUpdate skipped (offline)"
+            assert check_online(), "AutoUpdate skipped (offline)"
             LOGGER.info(check_output(f'pip install {s} {cmds}', shell=True).decode())
             source = file if 'file' in locals() else requirements
             s = f"{prefix} {n} package{'s' * (n > 1)} updated per {source}\n" \
@@ -471,7 +465,7 @@ def check_dataset(data, autodownload=True):
 
     # Download (optional)
     extract_dir = ''
-    if isinstance(data, (str, Path)) and (is_zipfile(data) or is_tarfile(data)):
+    if isinstance(data, (str, Path)) and str(data).endswith('.zip'):  # i.e. gs://bucket/dir/coco128.zip
         download(data, dir=f'{DATASETS_DIR}/{Path(data).stem}', unzip=True, delete=False, curl=False, threads=1)
         data = next((DATASETS_DIR / Path(data).stem).rglob('*.yaml'))
         extract_dir, autodownload = data.parent, False
@@ -613,11 +607,11 @@ def download(url, dir='.', unzip=True, delete=True, curl=False, threads=1, retry
                 else:
                     LOGGER.warning(f'❌ Failed to download {url}...')
 
-        if unzip and success and (f.suffix == '.gz' or is_zipfile(f) or is_tarfile(f)):
+        if unzip and success and f.suffix in ('.zip', '.tar', '.gz'):
             LOGGER.info(f'Unzipping {f}...')
-            if is_zipfile(f):
+            if f.suffix == '.zip':
                 unzip_file(f, dir)  # unzip
-            elif is_tarfile(f):
+            elif f.suffix == '.tar':
                 os.system(f'tar xf {f} --directory {f.parent}')  # unzip
             elif f.suffix == '.gz':
                 os.system(f'tar xfz {f} --directory {f.parent}')  # unzip
@@ -887,7 +881,7 @@ def non_max_suppression(
     time_limit = 0.5 + 0.05 * bs  # seconds to quit after
     redundant = True  # require redundant detections
     multi_label &= nc > 1  # multiple labels per box (adds 0.5ms/img)
-    merge = False  # use merge-NMS
+    merge = True  # use merge-NMS
 
     t = time.time()
     mi = 5 + nc  # mask start index

@@ -2,7 +2,7 @@ train: ../data/images/training/
 val: ../data/images/validation/
 
 # number of classes
-nc: 5
+nc: 8
 
 # class names
-names: ['Pororo', 'Crong', 'Loopy', 'Eddy', "Pobby"]
+names: ['Sophie_young', 'Sophie_old', 'Sophie_silver', 'Turnip-Head', "Calcifer", "Markl", "Howl_gold", "Howl_indigo"]

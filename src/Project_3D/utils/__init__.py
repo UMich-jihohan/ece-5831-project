@@ -47,6 +47,7 @@ def notebook_init(verbose=True):
     from utils.general import check_font, check_requirements, is_colab
     from utils.torch_utils import select_device  # imports
 
+    check_requirements(('psutil', 'IPython'))
     check_font()
 
     import psutil
