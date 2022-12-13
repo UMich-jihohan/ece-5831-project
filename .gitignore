@@ -144,6 +144,7 @@ dmypy.json
 *.TIFF
 *.HEIC
 *.mp4
+*.mkv
 *.mov
 *.MOV
 *.avi
@@ -182,7 +183,7 @@ VOC/
 
 # Neural Network weights -----------------------------------------------------------------------------------------------
 *.weights
-*.pt
+# *.pt
 *.pb
 *.onnx
 *.engine
