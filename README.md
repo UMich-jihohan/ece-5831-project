@@ -28,17 +28,28 @@ ece-5831-project/
 │   ├── ECE 5831 Project Update 1.pdf
 │   └── ECE 5831 Project Update 2.pdf
 ├── src/
-│   ├── classfy/
-│   ├── models/
-│   ├── segment/
-│   ├── utils/
-│   └── train.py        // python script for training the model
+│   ├── Project_2D/
+│   │   ├── classfy/
+│   │   ├── models/
+│   │   ├── segment/
+│   │   ├── utils/
+│   │   ├── Howl.py         // python script for splitting the dataset into 2 groups
+│   │   ├── train.py        // python script for training the model
+│   │   └── ...
+│   └── Project_3D/
+│       ├── classfy/
+│       ├── models/
+│       ├── segment/
+│       ├── utils/
+│       ├── Pororo.py       // python script for splitting the dataset into 2 groups
+│       ├── train.py        // python script for training the model
+│       └── ...
 └── README.md
 ```
 
 ## <div align="center"><a name="docs"></a>Documentation</div>
 
-See the [docs folder](https://github.com/UMich-jihohan/ece-5831-project/tree/master/docs) for full documentation.
+See the [docs](https://https://github.com/UMich-jihohan/ece-5831-project/docs) folder for full documentation.
 
 <!-- <details open>
 <summary>Install</summary>

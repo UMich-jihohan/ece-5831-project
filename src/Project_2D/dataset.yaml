@@ -1,0 +1,8 @@
+train: ../data/images/training/
+val: ../data/images/validation/
+
+# number of classes
+nc: 5
+
+# class names
+names: ['Pororo', 'Crong', 'Loopy', 'Eddy', "Pobby"]
