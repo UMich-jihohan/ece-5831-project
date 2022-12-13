@@ -85,8 +85,8 @@ class ClearmlLogger:
         self.data_dict = None
         if self.clearml:
             self.task = Task.init(
-                project_name=opt.project if opt.project != 'runs/train' else 'YOLOv5',
-                task_name=opt.name if opt.name != 'exp' else 'Training',
+                project_name='YOLOv5',
+                task_name='training',
                 tags=['YOLOv5'],
                 output_uri=True,
                 auto_connect_frameworks={'pytorch': False}
